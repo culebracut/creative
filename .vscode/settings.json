@@ -1,0 +1,4 @@
+{
+    "python.venvPath": "~/torch",
+    "python.pythonPath": "/home/system/torch/bin/python"
+}
