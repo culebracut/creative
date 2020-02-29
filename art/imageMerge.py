@@ -9,6 +9,7 @@ import tensorflow as tf
 import tensorflow_hub as hub
 import os, random
 import argparse
+import pathlib
 
 outputPath = '/media/system/UBUNTU 18_0/data/output/'
 imagePath = '/media/system/UBUNTU 18_0/art/resized/resized/'
@@ -64,11 +65,17 @@ def show_n(images, titles=('',)):
   #plt.savefig(outputPath+datetime.now().strftime("%d-%m-%Y_%I-%M-%S_%p"))
 
 # main
-def main(image, style):
-  for i in range(10):
+def main(image, artist):
+
+  filename = artist+'_' + '???.jpg'
+  files = list(pathlib.Path(styleImagePath).glob(filename))
+  
+  for file in files:
+  #for i in range(10):
       # Get files
-      style_image_url = styleImagePath + random.choice(os.listdir(styleImagePath)) 
+      #style_image_url = styleImagePath + random.choice(os.listdir(styleImagePath)) 
       #content_image_url = imagePath + random.choice(os.listdir(imagePath)) 
+      style_image_url = file
       
       # paramaters
       content_image_url = "/home/system/torch/creative/images/" + image
@@ -106,12 +113,12 @@ if __name__ == "__main__":
       required=True,
       help="Image to style")
     parser.add_argument(
-      "--style",
+      "--artist",
       type=str,
       default="",
       required=True,
-      help="The location for the Tensorboard log to begin visualization from.")
+      help="Artist to style")
 
     results = parser.parse_args()
     
-    main(results.image, results.style)
+    main(results.image, results.artist)
