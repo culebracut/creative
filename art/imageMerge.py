@@ -11,7 +11,6 @@ import os, random
 import argparse
 import pathlib
 
-outputPath = '/media/system/UBUNTU 18_0/data/output/'
 contentImagePath = '/home/system/torch/creative/images/'
 styleImagePath = '/media/system/UBUNTU 18_0/art/resized/resized/'
 modelPath = '/media/system/UBUNTU 18_0/data/arbitrary-image-stylization-v1-256/'
