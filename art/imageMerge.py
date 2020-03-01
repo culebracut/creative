@@ -12,7 +12,7 @@ import argparse
 import pathlib
 
 outputPath = '/media/system/UBUNTU 18_0/data/output/'
-imagePath = '/media/system/UBUNTU 18_0/art/resized/resized/'
+contentImagePath = '/home/system/torch/creative/images/'
 styleImagePath = '/media/system/UBUNTU 18_0/art/resized/resized/'
 modelPath = '/media/system/UBUNTU 18_0/data/arbitrary-image-stylization-v1-256/'
 
@@ -62,27 +62,18 @@ def show_n(images, titles=('',)):
     plt.axis('off')
     plt.title(titles[i] if len(titles) > i else '')
   plt.show()
-  #plt.savefig(outputPath+datetime.now().strftime("%d-%m-%Y_%I-%M-%S_%p"))
 
 # main
 def main(image, artist):
 
-  filename = artist+'_' + '???.jpg'
+  filename = '*'+artist+'*'
   files = list(pathlib.Path(styleImagePath).glob(filename))
+  random.shuffle(files)
   
   for file in files:
-  #for i in range(10):
-      # Get files
-      #style_image_url = styleImagePath + random.choice(os.listdir(styleImagePath)) 
-      #content_image_url = imagePath + random.choice(os.listdir(imagePath)) 
       style_image_url = file
+      content_image_url = contentImagePath + image
       
-      # paramaters
-      content_image_url = "/home/system/torch/creative/images/" + image
-      
-      print (style_image_url)
-      print (content_image_url)
-
       # The content image size can be arbitrary.
       output_image_size = 384  # @param {type:"integer"}
       content_img_size = (output_image_size, output_image_size)
