@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["--image", "smithRock.jpg", "--artist", "Warhol"]
+            "args": ["--image", "trump2.jpg", "--artist", "Vinci"]
         }
     ]
 }
