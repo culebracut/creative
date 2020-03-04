@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <style>
+      #info {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+    .img {
+        position: relative;
+        float: left;
+        width:  200px;
+        height: 200px;
+        background-position: 50% 50%;
+        background-repeat:   no-repeat;
+        background-size:     cover;
+}
+    </style>
+    
+    <script>
+      // Enter the API key from the Google Develoepr Console
+      var apiKey = 'AIzaSyCM19ng0CPjCjb6qoGqEn_d9n0j9vIG_Yw'    // 
+      var searchEngineId = '004606680159553452308:lljkd5nktz4' // same as CX
+      var requestUrl = 'https://www.googleapis.com/customsearch/v1?'
+
+      function handleClientLoad() {
+          gapi.load('client', {
+            callback: function() {
+            // Handle gapi.client initialization
+            initGapiClient();
+            },
+            onerror: function() {
+            // Handle loading error.
+            alert('gapi.client failed to load!');
+            },
+            timeout: 5000, // 5 seconds.
+            ontimeout: function() {
+            // Handle timeout.
+            alert('gapi.client could not load in a timely manner!');
+            }
+          });
+      }
+
+      function onRejected(response){alert('reject')}
+      function onFulfilled(reason){}
+
+      function initGapiClient() {
+       gapi.client.init({
+          apiKey: apiKey
+        }).then(onFulfilled, onRejected)
+      }
+
+      function makeRequest() {
+        // response handler
+        function writeResponse(response, raw) {
+          var searchResultsDiv = document.getElementById('searchResults');         
+          response.items.forEach(function(item) { 
+            var lnk = item.link;
+            var img = document.createElement('img');
+	          img.setAttribute('src', lnk);
+            img.setAttribute('class','img')
+	          searchResultsDiv.appendChild(img);
+          });
+        }
+
+        // build request
+        var searchTerm = document.getElementById('searchTerm').value;
+        gapi.client.request({'path': requestUrl, 
+                              'params' : {'q' : searchTerm, 
+                              'key' : apiKey, 
+                              'cx': searchEngineId,
+                              'searchType' : 'image'}})
+          .then(function(response) {
+            // Handle response
+            var searchResultsDiv = document.getElementById('searchResults');
+            searchResultsDiv.innerHTML = ""         
+            var items = response.result.items
+            for (var i = 0; i < items.length; i++) {
+            var lnk = items[i].link;
+            var img = document.createElement('img');
+	          img.setAttribute('src', lnk);
+            img.setAttribute('class','img')
+	          searchResultsDiv.appendChild(img);
+          }
+          }, function(reason) {
+            // Handle error
+            alert('error in response')
+          }
+        );
+      }
+    </script>
+    
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad();"
+      onreadystatechange="if (this.readyState === 'complete') this.onload();">
+    </script>
+  </head>
+
+  <body>
+    <p>Enter a Person, Place or Thing</p>
+    <label for="searchTerm"></label>
+    <input id="searchTerm" type="text" value="tomato" />
+    <button onclick="makeRequest();">
+      Retieve Images
+    </button>
+    <div style="margin-top:0.5em;">
+      <div id="searchResults"></div></div>
+  </body>
+</html>

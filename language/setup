@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Google Cloud Language setup"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/system/creative/language/My First Project-2d0272890d43.json"
+echo $GOOGLE_APPLICATION_CREDENTIALS
+
