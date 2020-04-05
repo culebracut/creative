@@ -1,4 +1,3 @@
 {
-    "python.venvPath": "~/torch",
-    "python.pythonPath": "/home/system/torch/bin/python"
+    "python.pythonPath": "/usr/bin/python3.6"
 }

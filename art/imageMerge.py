@@ -11,9 +11,9 @@ import os, random
 import argparse
 import pathlib
 
-contentImagePath = '/home/system/data/images/miscImages/'
-styleImagePath = '/home/system/data/images/resizedArtImages/'
-modelPath = '/home/system/models/arbitrary-image-stylization-v1-256/'
+contentImagePath = '/home/system/data/images/misc/'
+styleImagePath = '/home/system/data/images/resized/'
+modelPath = '/home/system/data/models/arbitrary-image-stylization-v1-256/'
 
 # Load TF-Hub module.
 #modelPath = 'https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2'
